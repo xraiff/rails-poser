@@ -53,4 +53,6 @@ Poser::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  match '*path', :to => "proxy#default", :via => [:get, :post]
 end
