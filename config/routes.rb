@@ -55,4 +55,5 @@ Poser::Application.routes.draw do
   #   end
 
   match '*path', :to => "proxy#default", :via => [:get, :post]
+  root to: "proxy#default"
 end
