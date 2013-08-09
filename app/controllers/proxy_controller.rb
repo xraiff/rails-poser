@@ -2,11 +2,16 @@ class ProxyController < ApplicationController
 
   require "net/http"
 
-  def default
-    #send_data 1, disposition: 'inline'
+  def get
     result = Net::HTTP.get_response("0.0.0.0", request.env["REQUEST_URI"], 3000)
-    Rails.logger.info "result.headers = #{result.headers.to_s}"
     result = filter_responses(result)
+    @body = result.body
+    render layout: false
+  end
+
+  def post
+    request.params
+    result = Net::HTTP.post_form("http://0.0.0.0:3000", request.params)
     @body = result.body
     render layout: false
   end
